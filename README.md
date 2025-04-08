@@ -257,11 +257,6 @@ const metrics = consumer.getMetrics();
 console.log(`Processed ${metrics.messagesProcessed} messages with ${metrics.messagesFailed} failures`);
 ```
 
-## API Reference
-
-See the [full API documentation](https://example.com/docs) for detailed information about all classes, methods, and
-options.
-
 ## License
 
 MIT 
