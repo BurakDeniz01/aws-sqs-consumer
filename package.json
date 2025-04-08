@@ -1,6 +1,6 @@
 {
   "name": "@iamdeniz/aws-sqs-consumer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Advanced AWS SQS message consumer with retry, DLQ, batch processing, metrics, and middleware support",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
