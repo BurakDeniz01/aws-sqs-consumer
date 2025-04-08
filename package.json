@@ -1,5 +1,5 @@
 {
-  "name": "aws-sqs-consumer",
+  "name": "@iamdeniz/aws-sqs-consumer",
   "version": "1.0.0",
   "description": "Advanced AWS SQS message consumer with retry, DLQ, batch processing, metrics, and middleware support",
   "main": "dist/index.js",
@@ -11,10 +11,8 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "tsc",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:all": "npm run build:cjs && npm run build:esm",
+    "build": "npx tsc",
+    "build:all": "npx tsc",
     "test": "jest",
     "lint": "eslint --ext .ts",
     "lint:fix": "eslint --fix .",
@@ -61,6 +59,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/aws-sqs-consumer.git"
-  }
+    "url": "git+https://github.com/yourusername/aws-sqs-consumer.git"
+  },
+  "directories": {
+    "example": "examples"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/aws-sqs-consumer/issues"
+  },
+  "homepage": "https://github.com/yourusername/aws-sqs-consumer#readme"
 }
