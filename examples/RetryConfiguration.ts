@@ -5,7 +5,8 @@
  * for handling transient failures when processing SQS messages.
  */
 
-import QueueConsumer from '../src';
+import { QueueConsumer } from '../src';
+
 
 // Create an SQS consumer with custom retry options
 const consumer = new QueueConsumer({

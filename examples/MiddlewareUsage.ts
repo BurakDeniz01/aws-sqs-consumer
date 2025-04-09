@@ -5,7 +5,7 @@
  * to an SQS consumer without modifying the core message handler.
  */
 
-import QueueConsumer, { MessageMiddleware } from '../src';
+import  { QueueConsumer, MessageMiddleware } from '../src';
 
 // Create an SQS consumer with middleware support
 const consumer = new QueueConsumer({

@@ -1,9 +1,17 @@
 {
   "name": "@iamdeniz/aws-sqs-consumer",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Advanced AWS SQS message consumer with retry, DLQ, batch processing, metrics, and middleware support",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/src/index.js",
+  "module": "dist/esm/src/index.js",
+  "types": "dist/cjs/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/src/index.js",
+      "require": "./dist/cjs/src/index.js",
+      "types": "./dist/cjs/src/index.d.ts"
+    }
+  },
   "files": [
     "dist",
     "LICENSE",
@@ -11,12 +19,12 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "npx tsc",
-    "build:all": "npx tsc",
-    "test": "jest",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:all": "npm run build",
     "lint": "eslint --ext .ts",
     "lint:fix": "eslint --fix .",
-    "docs": "typedoc",
     "prepublishOnly": "npm run build:all",
     "dev": "nodemon $npm_config_name"
   },

@@ -5,7 +5,7 @@
  * the processing of batches of messages.
  */
 
-import QueueConsumer, { BatchMiddleware } from '../../src';
+import { QueueConsumer, BatchMiddleware } from '../../src';
 
 // Create an SQS consumer with batch processing
 const consumer = new QueueConsumer({

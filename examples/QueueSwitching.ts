@@ -1,4 +1,4 @@
-import QueueConsumer from '../src';
+import { QueueConsumer } from '../src';
 
 /**
  * This example demonstrates how to implement priority-based queue switching

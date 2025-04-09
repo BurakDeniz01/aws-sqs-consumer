@@ -5,7 +5,7 @@
  * the performance of message processing.
  */
 
-import QueueConsumer, { MessageMiddleware } from '../../src';
+import { QueueConsumer, MessageMiddleware } from '../../src';
 
 // Create an SQS consumer
 const consumer = new QueueConsumer({

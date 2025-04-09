@@ -6,7 +6,7 @@
  * profile, or connecting to LocalStack for local development.
  */
 
-import QueueConsumer from '../src';
+import { QueueConsumer } from '../src';
 
 // Create an SQS consumer with custom AWS configuration
 const consumer = new QueueConsumer({

@@ -13,4 +13,4 @@ export { BatchMessageHandler, MessageHandler } from './types/handlers';
 export { BatchMiddleware, MessageMiddleware } from './types/middleware';
 
 // Export the main consumer class
-export { default } from './services/QueueConsumer';
+export { default as QueueConsumer } from './services/QueueConsumer';

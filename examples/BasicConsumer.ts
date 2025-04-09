@@ -5,7 +5,7 @@
  * that processes messages one at a time.
  */
 
-import QueueConsumer from '../src';
+import { QueueConsumer } from '../src';
 
 // Create a basic SQS consumer
 const consumer = new QueueConsumer({

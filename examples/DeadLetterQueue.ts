@@ -5,7 +5,7 @@
  * to handle messages that cannot be processed successfully after several retries.
  */
 
-import QueueConsumer from '../src';
+import { QueueConsumer } from '../src';
 
 // Create an SQS consumer with DLQ configuration
 const consumer = new QueueConsumer({
