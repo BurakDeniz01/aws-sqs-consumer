@@ -1,6 +1,6 @@
 {
   "name": "@iamdeniz/aws-sqs-consumer",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Advanced AWS SQS message consumer with retry, DLQ, batch processing, metrics, and middleware support",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -31,9 +31,14 @@
   "keywords": [
     "aws",
     "sqs",
+    "fifo",
+    "middleware",
+    "filter",
+    "priority",
+    "batch",
+    "credential",
     "queue",
     "consumer",
-    "batch",
     "retries",
     "dlq",
     "middleware",
