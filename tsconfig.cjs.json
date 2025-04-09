@@ -5,6 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "noEmit": false,
-    "declaration": true
+    "declaration": true,
+    "rootDir": "./src"
   }
 }

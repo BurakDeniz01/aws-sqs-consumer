@@ -12,15 +12,16 @@
     "skipLibCheck": true,
     "downlevelIteration": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true
   },
   "include": [
-    "./app.ts",
-    "./src",
-    "./examples"
+    "./src"
   ],
   "exclude": [
     "./node_modules",
-    "./dist"
+    "./dist",
+    "./examples",
+    "**/*.test.ts",
+    "**/*.spec.ts"
   ]
 }
