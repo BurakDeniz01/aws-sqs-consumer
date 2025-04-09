@@ -9,20 +9,20 @@ import {
     SQSClient,
     SQSClientConfig
 } from '@aws-sdk/client-sqs';
-import {fromIni} from '@aws-sdk/credential-providers';
-import {NodeHttpHandler} from '@aws-sdk/node-http-handler';
-import {EventEmitter} from 'events';
-import {HttpsProxyAgent} from 'https-proxy-agent';
-import {QueueConsumerEvents} from '../enums/events';
-import {AwsConfig, ConsumerOptions} from '../interfaces/config';
+import { fromIni } from '@aws-sdk/credential-providers';
+import { NodeHttpHandler } from '@aws-sdk/node-http-handler';
+import { EventEmitter } from 'events';
+import { HttpsProxyAgent } from 'https-proxy-agent';
+import { QueueConsumerEvents } from '../enums/events';
+import { AwsConfig, ConsumerOptions } from '../interfaces/config';
 import DeadLetterQueueOptions from '../interfaces/dlq';
-import {ParsedMessage} from '../interfaces/messages';
-import MetricsOptions, {ConsumerMetrics, ErrorMetrics, MessageProcessingMetrics} from '../interfaces/metrics';
-import {BatchMiddlewareContext, MiddlewareContext, MiddlewareOptions} from '../interfaces/middleware';
+import { ParsedMessage } from '../interfaces/messages';
+import MetricsOptions, { ConsumerMetrics, ErrorMetrics, MessageProcessingMetrics } from '../interfaces/metrics';
+import { BatchMiddlewareContext, MiddlewareContext, MiddlewareOptions } from '../interfaces/middleware';
 import BatchOptions from '../interfaces/options';
 import RetryOptions from '../interfaces/retry';
-import {BatchMessageHandler, MessageHandler} from '../types/handlers';
-import {BatchMiddleware, MessageMiddleware} from '../types/middleware';
+import { BatchMessageHandler, MessageHandler } from '../types/handlers';
+import { BatchMiddleware, MessageMiddleware } from '../types/middleware';
 
 export default class QueueConsumer extends EventEmitter {
 

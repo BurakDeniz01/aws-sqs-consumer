@@ -10,7 +10,7 @@ import QueueConsumer from '../src';
 // Create a basic SQS consumer
 const consumer = new QueueConsumer({
     // The URL of your SQS queue
-    url: 'https://sqs.eu-central-1.amazonaws.com/859749475761/test',
+    url: 'https://sqs.us-east-1.amazonaws.com/123456789012/my-queue.fifo',
 
     // Handler function that processes each message
     handler: async (message) => {
