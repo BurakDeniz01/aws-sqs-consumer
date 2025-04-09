@@ -16,13 +16,13 @@ A robust, high-performance AWS SQS consumer library for Node.js with advanced fe
 ## Installation
 
 ```bash
-npm install aws-sqs-consumer
+npm install @iamdeniz/aws-sqs-consumer
 ```
 
 ## Basic Usage
 
 ```typescript
-import {QueueConsumer} from 'aws-sqs-consumer';
+import {QueueConsumer} from '@iamdeniz/aws-sqs-consumer';
 
 // Create a consumer
 const consumer = new QueueConsumer({
@@ -182,7 +182,7 @@ const consumer = new QueueConsumer({
 Add middleware to preprocess, transform, filter, or validate messages:
 
 ```typescript
-import {QueueConsumer, loggingMiddleware, createFilterMiddleware} from 'aws-sqs-consumer';
+import {QueueConsumer, loggingMiddleware, createFilterMiddleware} from '@iamdeniz/aws-sqs-consumer';
 
 const consumer = new QueueConsumer({
     url: 'https://sqs.us-east-1.amazonaws.com/123456789012/my-queue',
