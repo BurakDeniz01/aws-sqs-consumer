@@ -5,7 +5,7 @@
  * for improved throughput and efficiency.
  */
 
-import { QueueConsumer, ProcessedBatch } from '../src';
+import { ProcessedBatch, QueueConsumer } from '../src';
 
 // Create a batch-enabled SQS consumer
 const consumer = new QueueConsumer({

@@ -24,6 +24,11 @@ import RetryOptions from '../interfaces/retry';
 import { BatchMessageHandler, MessageHandler } from '../types/handlers';
 import { BatchMiddleware, MessageMiddleware } from '../types/middleware';
 
+/**
+ * QueueConsumer class for processing AWS SQS queue messages
+ * Provides both individual message processing and batch processing capabilities
+ * Supports middleware, retry logic, dead letter queues, and performance metrics
+ */
 export default class QueueConsumer extends EventEmitter {
 
     private readonly _client: SQSClient;
@@ -104,6 +109,10 @@ export default class QueueConsumer extends EventEmitter {
         useDefaultCredentialProviderChain: true,
     };
 
+    /**
+     * Creates a new QueueConsumer instance
+     * @param options Configuration options for the consumer
+     */
     constructor(options: ConsumerOptions) {
         super();
         this._url = options.url;
@@ -230,6 +239,10 @@ export default class QueueConsumer extends EventEmitter {
 
     }
 
+    /**
+     * Returns the number of available messages in the queue
+     * @returns Promise resolving to the number of available messages
+     */
     public async getAvailableQueueNumber(): Promise<number> {
         const data = await this._client.send(
             new GetQueueAttributesCommand({
@@ -245,6 +258,10 @@ export default class QueueConsumer extends EventEmitter {
     }
 
 
+    /**
+     * Sets a function to be called when the consumer stops
+     * @param stopFunction Function to execute when consumer stops
+     */
     public setStoppedFunction(stopFunction: () => Promise<void>): void {
         this._stoppedFunction = stopFunction;
     }
@@ -276,6 +293,8 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Extract region from queue URL
+     * @param queueUrl The SQS queue URL
+     * @returns The AWS region extracted from the URL
      */
     private getRegionFromQueueUrl(queueUrl: string): string {
         try {
@@ -291,6 +310,7 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Process received messages
+     * @param messages Array of SQS messages to process
      */
     private async processMessages(messages: Message[]): Promise<void> {
         try {
@@ -317,6 +337,7 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Get consumer metrics
+     * @returns Object containing current consumer metrics
      */
     private getMetrics(): ConsumerMetrics {
         const now = new Date();
@@ -338,6 +359,8 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Process a group of messages
+     * @param groupId Group ID for the messages
+     * @param messages Array of SQS messages to process
      */
     private async processMessageGroup(groupId: string, messages: Message[]): Promise<void> {
         for (const message of messages) {
@@ -354,6 +377,8 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Process an individual message
+     * @param message SQS message to process
+     * @param groupId Group ID for the message
      */
     private async processIndividualMessage(message: Message, groupId: string): Promise<void> {
         // Implementation for processing individual messages
@@ -396,6 +421,7 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Execute batch middleware pipeline
+     * @param context Batch middleware context
      */
     private async executeBatchMiddlewarePipeline(context: BatchMiddlewareContext): Promise<void> {
         if (!this._middlewareOptions.enabled || this._batchMiddleware.length === 0) {
@@ -415,6 +441,7 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Execute message middleware pipeline
+     * @param context Message middleware context
      */
     private async executeMessageMiddlewarePipeline(context: MiddlewareContext): Promise<void> {
         if (!this._middlewareOptions.enabled || this._messageMiddleware.length === 0) {
@@ -434,8 +461,10 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Send a failed message to the Dead Letter Queue
+     * @param message Failed SQS message
+     * @param error Error that caused the failure
+     * @param retryCount Number of retries attempted
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private async sendToDeadLetterQueue(message: Message, error: any, retryCount: number): Promise<void> {
         // Implementation for sending to DLQ
         // This is a placeholder
@@ -475,6 +504,8 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Calculate retry backoff delay using exponential backoff
+     * @param retryCount Current retry attempt number
+     * @returns Delay in milliseconds before next retry
      */
     private calculateBackoffDelay(retryCount: number): number {
         const {initialDelayMs, backoffMultiplier, maxDelayMs} = this._retryOptions;
@@ -484,6 +515,8 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Extend visibility timeout for a message
+     * @param message SQS message
+     * @param visibilityTimeout New visibility timeout in seconds
      */
     private async extendMessageVisibility(message: Message, visibilityTimeout: number): Promise<void> {
         if (!message.ReceiptHandle) return;
@@ -504,11 +537,15 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Sleep for a specified duration
+     * @param ms Time to sleep in milliseconds
      */
     private async sleep(ms: number): Promise<void> {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    /**
+     * Main polling loop for retrieving messages from the queue
+     */
     private async pollMessages(): Promise<void> {
         this._isShuttingDown = false;
         while (!this._isShuttingDown) {
@@ -559,6 +596,9 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Parses an SQS message into a more usable format
+     * @param message Raw SQS message
+     * @param groupId Group ID for the message
+     * @returns Parsed message or null if parsing failed
      */
     private parseMessage(message: Message, groupId: string): ParsedMessage | null {
         try {
@@ -586,6 +626,8 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Deletes a batch of messages in a single SQS request
+     * @param messages Array of SQS messages to delete
+     * @returns Object containing arrays of successful and failed message IDs
      */
     private async deleteMessageBatch(messages: Message[]): Promise<{ successful: string[], failed: string[] }> {
         if (!messages.length) {
@@ -640,6 +682,8 @@ export default class QueueConsumer extends EventEmitter {
 
     /**
      * Process a batch of messages using the batch handler
+     * @param groupId Group ID for the batch
+     * @param messages Array of SQS messages to process as a batch
      */
     private async processBatchWithBatchHandler(
         groupId: string,

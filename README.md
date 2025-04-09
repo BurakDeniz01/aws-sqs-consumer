@@ -2,6 +2,9 @@
 
 A robust, high-performance AWS SQS consumer library for Node.js with advanced features:
 
+- Standard and FIFO SQS support 
+- Custom queue switching (priority-based queue switching, between high and low priority queues etc.)
+- Priority Sorting Middleware Support
 - Configurable retry mechanism with exponential backoff
 - Dead Letter Queue (DLQ) support
 - Comprehensive metrics and monitoring with event emitters

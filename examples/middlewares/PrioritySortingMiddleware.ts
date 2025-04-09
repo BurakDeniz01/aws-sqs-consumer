@@ -5,7 +5,7 @@
  * by priority before processing them.
  */
 
-import { QueueConsumer, BatchMiddleware, MiddlewareContext } from '../../src';
+import { BatchMiddleware, MiddlewareContext, QueueConsumer } from '../../src';
 
 // Create an SQS consumer with batch processing
 const consumer = new QueueConsumer({
